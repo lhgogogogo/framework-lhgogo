@@ -11,6 +11,8 @@
     <module>spring-demo</module>
       <module>springboot-spi</module>
       <module>springboot-es</module>
+      <module>spring-ioc</module>
+    <module>spring-ioc-02</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -49,7 +51,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
 
