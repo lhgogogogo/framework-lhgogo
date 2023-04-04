@@ -13,6 +13,9 @@
       <module>springboot-es</module>
       <module>spring-ioc-01</module>
     <module>spring-ioc-02</module>
+    <module>spring-ioc-03</module>
+    <module>spring-ioc-04</module>
+    <module>spring-ioc-05</module>
   </modules>
   <packaging>pom</packaging>
 
