@@ -14,6 +14,10 @@ import java.util.Map;
  */
 
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry {
+    @Override
+    public boolean containsBeanDefinition(String beanName) {
+        return beanDefinitionMap.containsKey(beanName);
+    }
 
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 

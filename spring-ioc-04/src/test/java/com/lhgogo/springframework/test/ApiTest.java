@@ -1,13 +1,20 @@
 package com.lhgogo.springframework.test;
 
+import cn.hutool.core.io.IoUtil;
 import com.lhgogo.springframework.beans.PropertyValue;
 import com.lhgogo.springframework.beans.factory.PropertyValues;
 import com.lhgogo.springframework.beans.factory.config.BeanDefinition;
 import com.lhgogo.springframework.beans.factory.config.BeanReference;
 import com.lhgogo.springframework.beans.factory.support.DefaultListableBeanFactory;
+import com.lhgogo.springframework.core.io.DefaultResourceLoader;
+import com.lhgogo.springframework.core.io.Resource;
 import com.lhgogo.springframework.test.bean.UserDao;
 import com.lhgogo.springframework.test.bean.UserService;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author ：linhui
@@ -23,11 +30,11 @@ public class ApiTest {
         // 1 初始化bean工厂
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         // 2 注册bean
-        beanFactory.registryBeanDefinition("userDao",new BeanDefinition(UserDao.class));
+        beanFactory.registryBeanDefinition("userDao", new BeanDefinition(UserDao.class));
         // 3 userService设置属性
         PropertyValues propertyValues = new PropertyValues();
-        propertyValues.addPropertyValue(new PropertyValue("uId","10001"));
-        propertyValues.addPropertyValue(new PropertyValue("userDao",new BeanReference("userDao")));
+        propertyValues.addPropertyValue(new PropertyValue("uId", "10001"));
+        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
         // 4 userService注入bean
         BeanDefinition beanDefinition = new BeanDefinition(UserService.class, propertyValues);
         beanFactory.registryBeanDefinition("userService", beanDefinition);
@@ -37,4 +44,35 @@ public class ApiTest {
     }
 
 
+    private DefaultResourceLoader resourceLoader;
+
+    @Before
+    public void init() {
+        resourceLoader = new DefaultResourceLoader();
+    }
+
+    @Test
+    public void test_classpath() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+
+    @Test
+    public void test_file() throws IOException {
+        Resource resource = resourceLoader.getResource("src/test/resources/important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+
+    @Test
+    public void test_url() throws IOException {
+        // 网络原因可能导致GitHub不能读取，可以放到自己的Gitee仓库。读取后可以从内容中搜索关键字；OLpj9823dZ
+        Resource resource = resourceLoader.getResource("https://github.com/fuzhengwei/small-spring/blob/main/important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
 }

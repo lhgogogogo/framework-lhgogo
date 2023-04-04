@@ -11,7 +11,7 @@
     <module>spring-demo</module>
       <module>springboot-spi</module>
       <module>springboot-es</module>
-      <module>spring-ioc</module>
+      <module>spring-ioc-01</module>
     <module>spring-ioc-02</module>
   </modules>
   <packaging>pom</packaging>
