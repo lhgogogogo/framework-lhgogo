@@ -1,7 +1,11 @@
 package com.lhgogo.springframework.beans.factory.support;
 
-import com.lhgogo.springframework.beans.factory.BeanFactory;
 import com.lhgogo.springframework.beans.factory.config.BeanDefinition;
+import com.lhgogo.springframework.beans.factory.config.BeanPostProcessor;
+import com.lhgogo.springframework.beans.factory.config.ConfigurableBeanFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ：linhui
@@ -10,7 +14,10 @@ import com.lhgogo.springframework.beans.factory.config.BeanDefinition;
  * @version:
  */
 
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+
+    /** BeanPostProcessors to apply in createBean */
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
     @Override
     public Object getBean(String beanName) {
         return doGetBean(beanName,null);
@@ -38,4 +45,14 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     protected abstract BeanDefinition getBeanDefinition(String beanName);
 
     protected abstract Object createBean(String beanName,BeanDefinition beanDefinition,Object[] objects);
+
+    @Override
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.remove(beanPostProcessor);
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
+    }
 }

@@ -1,5 +1,7 @@
 package com.lhgogo.springframework.test.bean;
 
+import lombok.Data;
+
 /**
  * @author ：linhui
  * @description ：
@@ -7,42 +9,15 @@ package com.lhgogo.springframework.test.bean;
  * @version:
  */
 
-
+@Data
 public class UserService {
 
     private String uId;
-
+    private String company;
+    private String location;
     private UserDao userDao;
 
-    public UserService() {
-    }
-
-    public UserService(String uId) {
-        this.uId = uId;
-    }
-
-    public UserService(String uId, UserDao userDao) {
-        this.uId = uId;
-        this.userDao = userDao;
-    }
-
     public String queryUserInfo() {
-        return userDao.queryUserName(uId);
-    }
-
-    public String getuId() {
-        return uId;
-    }
-
-    public void setuId(String uId) {
-        this.uId = uId;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+        return userDao.queryUserName(uId)+", 公司："+company+", 地点"+location;
     }
 }

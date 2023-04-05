@@ -52,4 +52,6 @@ public interface BeanDefinitionReader {
      * @date 2023/4/3 14:29
      */
     void loadBeanDefinitions(String location) throws BeansException;
+
+    void loadBeanDefinitions(String... locations) throws BeansException;
 }
