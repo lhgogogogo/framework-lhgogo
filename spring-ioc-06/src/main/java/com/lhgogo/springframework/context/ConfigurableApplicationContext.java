@@ -24,4 +24,22 @@ public interface ConfigurableApplicationContext extends ApplicationContext{
      * @date 2023/4/4 15:37
      */
     void refresh() throws BeansException;
+
+    /**
+     * @param :
+     * @return void
+     * @author 林辉
+     * @description 注册虚拟机钩子的方法
+     * @date 2023/4/6 16:46
+     */
+    void registerShutdownHook();
+
+    /**
+     * @param :
+     * @return void
+     * @author 林辉
+     * @description 手动执行关闭
+     * @date 2023/4/6 16:46
+     */
+    void close();
 }

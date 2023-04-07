@@ -14,12 +14,16 @@ public class UserDao {
 
     private static Map<String, String> hashMap = new HashMap<>();
 
-    static {
-        hashMap.put("10001", "小林");
-        hashMap.put("10002", "憨子姐姐");
-        hashMap.put("10003", "候大哥");
-        hashMap.put("10004", "候二哥");
-        hashMap.put("10005", "珍珍姐姐");
+    public void initDataMethod(){
+        System.out.println("执行：init-method");
+        hashMap.put("10001", "小傅哥");
+        hashMap.put("10002", "八杯水");
+        hashMap.put("10003", "阿毛");
+    }
+
+    public void destroyDataMethod(){
+        System.out.println("执行：destroy-method");
+        hashMap.clear();
     }
 
     public String queryUserName(String uId) {
